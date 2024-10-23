@@ -607,7 +607,7 @@ export interface ApiSpaceSpace extends Struct.CollectionTypeSchema {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
