@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invitations",
+  "info": {
+    "singularName": "invitation",
+    "pluralName": "invitations",
+    "displayName": "Invitation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "space": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::space.space"
+    },
+    "inviter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "invitee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

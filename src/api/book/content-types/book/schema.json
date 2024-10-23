@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "books",
+  "info": {
+    "singularName": "book",
+    "pluralName": "books",
+    "displayName": "Book",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "primary_photo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "deleted_at": {
+      "type": "datetime"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "stories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::story.story",
+      "mappedBy": "book"
+    },
+    "space": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::space.space",
+      "inversedBy": "books"
+    }
+  }
+}
