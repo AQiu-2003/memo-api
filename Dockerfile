@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 # 安装依赖
-RUN yarn config set registry http://mirrors.cloud.tencent.com/npm/
+# RUN yarn config set registry http://mirrors.cloud.tencent.com/npm/
 RUN yarn install
 
 # 复制整个项目
