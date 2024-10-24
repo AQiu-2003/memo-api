@@ -478,6 +478,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    profile: Schema.Attribute.Relation<'oneToOne', 'api::profile.profile'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -579,9 +580,9 @@ export interface ApiInvitationInvitation extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    confirmed: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
+    condition: Schema.Attribute.Enumeration<
+      ['pending', 'accepted', 'rejected']
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -593,6 +594,41 @@ export interface ApiInvitationInvitation extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::invitation.invitation'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProfileProfile extends Struct.CollectionTypeSchema {
+  collectionName: 'profiles';
+  info: {
+    singularName: 'profile';
+    pluralName: 'profiles';
+    displayName: 'Profile';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    age: Schema.Attribute.Integer & Schema.Attribute.Required;
+    avatar: Schema.Attribute.Media<'images'>;
+    gender: Schema.Attribute.Enumeration<['male', 'female', 'other']>;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::profile.profile'
     > &
       Schema.Attribute.Private;
   };
@@ -1052,6 +1088,7 @@ declare module '@strapi/strapi' {
       'api::book.book': ApiBookBook;
       'api::favourite.favourite': ApiFavouriteFavourite;
       'api::invitation.invitation': ApiInvitationInvitation;
+      'api::profile.profile': ApiProfileProfile;
       'api::space.space': ApiSpaceSpace;
       'api::story.story': ApiStoryStory;
       'admin::permission': AdminPermission;

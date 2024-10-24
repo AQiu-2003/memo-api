@@ -2,6 +2,28 @@
  * invitation router
  */
 
-import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter('api::invitation.invitation');
+export default {
+  routes: [
+    {
+      method: "GET",
+      path: "/invitations/inviter",
+      handler: "invitation.findManyAsInviter",
+    },
+    {
+      method: "GET",
+      path: "/invitations/invitee",
+      handler: "invitation.findManyAsInvitee",
+    },
+    {
+      method: "POST",
+      path: "/invitations",
+      handler: "invitation.create",
+    },
+    {
+      method: "POST",
+      path: "/invitations/:documentId",
+      handler: "invitation.respond",
+    },
+  ],
+};

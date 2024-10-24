@@ -2,6 +2,37 @@
  * space router
  */
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::space.space');
+export default {
+  routes: [
+    {
+      method: "GET",
+      path: "/spaces/:documentId",
+      handler: "space.findOne",
+    },
+    {
+      method: "GET",
+      path: "/spaces",
+      handler: "space.findMany",
+    },
+    {
+      method: "POST",
+      path: "/spaces",
+      handler: "space.create",
+    },
+    {
+      method: "PUT",
+      path: "/spaces/:documentId",
+      handler: "space.update",
+    },
+    {
+      method: "DELETE",
+      path: "/spaces/:documentId",
+      handler: "space.delete",
+    },
+    {
+      method: "DELETE",
+      path: "/spaces/:documentId/members/:memberDocumentId",
+      handler: "space.deleteMember",
+    },
+  ],
+};

@@ -2,6 +2,17 @@
  * favourite router
  */
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::favourite.favourite');
+export default {
+  routes: [
+    {
+      method: "GET",
+      path: "/favourites",
+      handler: "favourite.findMany",
+    },
+    {
+      method: "POST",
+      path: "/favourites/:documentId",
+      handler: "favourite.like",
+    },
+  ],
+};
