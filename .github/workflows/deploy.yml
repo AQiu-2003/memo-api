@@ -1,4 +1,4 @@
-name: 部署到服务器
+name: deploy to server
 
 on:
   push:
@@ -24,6 +24,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           envs: APP_KEYS,API_TOKEN_SALT,ADMIN_JWT_SECRET,TRANSFER_TOKEN_SALT
           script: |
+            set -e
             if [ ! -d "/home/ubuntu/memo" ]; then
               cd /home/ubuntu
               mkdir memo
