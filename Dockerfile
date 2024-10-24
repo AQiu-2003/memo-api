@@ -4,14 +4,16 @@ FROM node:20-alpine
 # 设置工作目录
 WORKDIR /app
 
-# 复制package.json和yarn.lock
-COPY package.json yarn.lock ./
+# install the dependencies before build this project
 
-# 安装依赖
-RUN yarn config set registry 'https://registry.npm.taobao.org'
-RUN yarn install
+# # 复制package.json和yarn.lock
+# COPY package.json yarn.lock ./
 
-# 复制整个项目
+# # 安装依赖
+# RUN yarn config set registry 'https://registry.npm.taobao.org'
+# RUN yarn install
+
+# # 复制整个项目
 COPY . .
 
 # 构建Strapi项目

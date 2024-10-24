@@ -37,6 +37,7 @@ jobs:
               cp docker-compose.yml ../
             fi
             cd /home/ubuntu/memo/memo-api
+            yarn install
             echo "APP_KEYS=$APP_KEYS" > .env
             echo "API_TOKEN_SALT=$API_TOKEN_SALT" >> .env
             echo "ADMIN_JWT_SECRET=$ADMIN_JWT_SECRET" >> .env
