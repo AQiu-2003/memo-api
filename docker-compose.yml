@@ -3,10 +3,10 @@ services:
     image: memo-api:latest
     container_name: strapi
     ports:
-      - "1338:1338"
+      - "1338:1337"
     environment:
       - HOST=0.0.0.0
-      - PORT=1338
+      - PORT=1337
       - NODE_ENV=production
       - DATABASE_CLIENT=postgres
       - DATABASE_HOST=127.0.0.1
@@ -19,7 +19,7 @@ services:
       - ./uploads:/app/public/uploads
     depends_on:
       - db
-    restart: always
+    restart: unless-stopped
 
   db:
     image: postgres
@@ -30,7 +30,7 @@ services:
       POSTGRES_PASSWORD: 114514
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: always
+    restart: unless-stopped
 
 volumes:
   postgres_data:
