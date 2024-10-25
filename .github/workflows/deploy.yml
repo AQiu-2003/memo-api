@@ -44,7 +44,7 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.SERVER_PASSWORD }}
         source: memo-api-img.tar
-        target: /home/ubuntu/memo/memo-api-img.tar
+        target: /home/ubuntu/memo
 
   deploy:
     runs-on: ubuntu-latest
