@@ -21,7 +21,7 @@ jobs:
         API_TOKEN_SALT: ${{ secrets.API_TOKEN_SALT }}
         ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
         TRANSFER_TOKEN_SALT: ${{ secrets.TRANSFER_TOKEN_SALT }}
-      script: |
+      run: |
         echo "APP_KEYS=$APP_KEYS" >> .env
         echo "API_TOKEN_SALT=$API_TOKEN_SALT" >> .env
         echo "ADMIN_JWT_SECRET=$ADMIN_JWT_SECRET" >> .env
