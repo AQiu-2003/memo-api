@@ -10,7 +10,7 @@ services:
       - NODE_ENV=production
       - DATABASE_CLIENT=postgres
       - DATABASE_HOST=127.0.0.1
-      - DATABASE_PORT=5432
+      - DATABASE_PORT=db
       - DATABASE_NAME=memo
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=114514
