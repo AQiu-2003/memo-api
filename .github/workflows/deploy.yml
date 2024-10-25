@@ -69,4 +69,5 @@ jobs:
           cd /home/ubuntu/memo/memo-api
           cp docker-compose.yml ../
           cd ..
+          sudo docker load -i memo-api-img.tar
           sudo docker compose -p memo up -d strapi
