@@ -3,7 +3,7 @@ services:
     image: memo-api:latest
     container_name: strapi
     ports:
-      - "1338:1337"
+      - "1337:1337"
     environment:
       - HOST=0.0.0.0
       - PORT=1337
