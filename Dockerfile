@@ -4,14 +4,11 @@ FROM node:20-alpine
 # 设置工作目录
 WORKDIR /app
 
-# install the dependencies before build this project
+# 复制package.json和yarn.lock
+COPY package.json yarn.lock ./
 
-# # 复制package.json和yarn.lock
-# COPY package.json yarn.lock ./
-
-# # 安装依赖
-# RUN yarn config set registry 'https://registry.npm.taobao.org'
-# RUN yarn install
+# 安装依赖
+RUN yarn install
 
 # # 复制整个项目
 COPY . .

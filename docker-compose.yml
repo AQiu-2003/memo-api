@@ -1,7 +1,6 @@
 services:
   strapi:
-    build:
-      context: ./memo-api # Strapi项目的路径
+    image: memo-api:latest
     container_name: strapi
     ports:
       - "1338:1338"
@@ -17,7 +16,7 @@ services:
       - DATABASE_PASSWORD=114514
       - DATABASE_SSL=false
     volumes:
-      - ../uploads:/app/public/uploads
+      - ./uploads:/app/public/uploads
     depends_on:
       - db
     restart: always
