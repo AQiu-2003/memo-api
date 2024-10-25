@@ -16,16 +16,11 @@ jobs:
       uses: docker/setup-buildx-action@v3
     
     - name: Add production environment variables
-      env:
-        APP_KEYS: ${{ secrets.APP_KEYS }}
-        API_TOKEN_SALT: ${{ secrets.API_TOKEN_SALT }}
-        ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
-        TRANSFER_TOKEN_SALT: ${{ secrets.TRANSFER_TOKEN_SALT }}
       run: |
-        echo "APP_KEYS=$APP_KEYS" > .env
-        echo "API_TOKEN_SALT=$API_TOKEN_SALT" >> .env
-        echo "ADMIN_JWT_SECRET=$ADMIN_JWT_SECRET" >> .env
-        echo "TRANSFER_TOKEN_SALT=$TRANSFER_TOKEN_SALT" >> .env
+        echo "APP_KEYS=${{ secrets.APP_KEYS }}" > .env
+        echo "API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}" >> .env
+        echo "ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}" >> .env
+        echo "TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }}" >> .env
 
     - name: Build Docker image
       run: |
