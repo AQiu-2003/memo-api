@@ -34,6 +34,8 @@ jobs:
     - name: Save Docker image to tar
       run: |
         docker save memo-api:latest -o memo-api-img.tar
+        ls -l memo-api-img.tar
+        chmod 644 memo-api-img.tar
 
     - name: Upload Docker image to server
       uses: appleboy/scp-action@v0.1.7
