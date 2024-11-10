@@ -14,8 +14,11 @@ export default factories.createCoreController(
       if (!isOwner) {
         return ctx.forbidden("You are not the owner of this space");
       }
-      ctx.params.id = ctx.params.documentId;
-      return await super.findOne(ctx);
+      const space = await strapi.documents("api::space.space").findOne({
+        documentId: ctx.params.documentId,
+        ...ctx.request.query,
+      });
+      return { data: space, meta: {} };
     },
 
     async findMany(ctx) {

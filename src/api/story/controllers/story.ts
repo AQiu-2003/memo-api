@@ -16,8 +16,11 @@ export default factories.createCoreController(
           "You are not a contributor of this story, or this story is not existing"
         );
       }
-      ctx.params.id = ctx.params.documentId;
-      return await super.findOne(ctx);
+      const story = await strapi.documents("api::story.story").findOne({
+        documentId: ctx.params.documentId,
+        ...ctx.request.query,
+      });
+      return { data: story, meta: {} };
     },
 
     async findMany(ctx) {

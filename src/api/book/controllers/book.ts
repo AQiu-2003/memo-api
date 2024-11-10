@@ -16,13 +16,16 @@ export default factories.createCoreController(
           "You are not a contributor of this book, or this book is not existing"
         );
       }
-      ctx.params.id = ctx.params.documentId;
-      return await super.findOne(ctx);
+      const book = await strapi.documents("api::book.book").findOne({
+        documentId: ctx.params.documentId,
+        ...ctx.request.query,
+      });
+      return { data: book, meta: {} };
     },
 
     async findMany(ctx) {
       console.log(ctx.request.query.filters);
-      
+
       const spaceFilter = ctx.request.query.space
         ? {
             documentId: ctx.request.query.space,
