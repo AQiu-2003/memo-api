@@ -12,6 +12,7 @@ export default factories.createCoreController(
         filters: {
           user: { documentId: ctx.state.user.documentId },
         },
+        populate: ["avatar"],
       });
       if (!profile) {
         return ctx.notFound("Profile not found");
