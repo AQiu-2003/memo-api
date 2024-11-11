@@ -45,6 +45,14 @@ export default factories.createCoreController(
       return { data: invitations, meta: {} };
     },
 
+    async getProfileFromEmail(ctx) {
+      const profile = await strapi.documents("api::profile.profile").findFirst({
+        filters: { user: { email: ctx.params.email } },
+        populate: ["user"],
+      });
+      return { data: profile, meta: {} };
+    },
+
     async create(ctx) {
       const { space, invitee } = ctx.request.body;
       if (!space || !invitee) {

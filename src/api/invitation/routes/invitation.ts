@@ -25,5 +25,10 @@ export default {
       path: "/invitations/:documentId",
       handler: "invitation.respond",
     },
+    {
+      method: "GET",
+      path: "/invitations/profile/:email",
+      handler: "invitation.getProfileFromEmail",
+    },
   ],
 };
