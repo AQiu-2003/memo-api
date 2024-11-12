@@ -24,7 +24,6 @@ export default factories.createCoreController(
               documentId: ctx.state.user.documentId,
             },
           },
-          populate: ["invitee"],
         });
       return { data: invitations, meta: {} };
     },
@@ -40,7 +39,6 @@ export default factories.createCoreController(
               documentId: ctx.state.user.documentId,
             },
           },
-          populate: ["inviter"],
         });
       return { data: invitations, meta: {} };
     },
