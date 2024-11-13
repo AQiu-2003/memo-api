@@ -100,6 +100,7 @@ export default factories.createCoreController(
         .findOne({
           documentId: ctx.params.documentId,
           fields: ["condition"],
+          populate: ["space", "invitee", "space.members"],
         });
       if (condition.includes(invitation.condition as Condition)) {
         return ctx.badRequest("You have already responded to this invitation");
@@ -112,6 +113,17 @@ export default factories.createCoreController(
             condition: response,
           },
         });
+      if (response === Condition.ACCEPTED) {
+        await strapi.documents("api::space.space").update({
+          documentId: invitation.space.documentId,
+          data: {
+            members: [
+              ...invitation.space.members.map((member) => member.documentId),
+              invitation.invitee.documentId,
+            ],
+          },
+        });
+      }
       return { data: updatedInvitation, meta: {} };
     },
   })

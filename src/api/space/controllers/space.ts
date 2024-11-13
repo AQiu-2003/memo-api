@@ -11,8 +11,11 @@ export default factories.createCoreController(
       const isOwner = await strapi
         .service("api::user.user")
         .validateSpaceOwner(ctx.state.user, ctx.params.documentId);
-      if (!isOwner) {
-        return ctx.forbidden("You are not the owner of this space");
+      const isMember = await strapi
+        .service("api::user.user")
+        .validateSpaceMember(ctx.state.user, ctx.params.documentId);
+      if (!isOwner && !isMember) {
+        return ctx.forbidden("You are not the owner or member of this space");
       }
       const space = await strapi.documents("api::space.space").findOne({
         documentId: ctx.params.documentId,
