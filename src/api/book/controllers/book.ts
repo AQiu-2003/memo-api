@@ -91,6 +91,24 @@ export default factories.createCoreController(
           "You are not a contributor of this book, or this book is not existing"
         );
       }
+
+      // 查找该book下的所有stories
+      const stories = await strapi.documents("api::story.story").findMany({
+        filters: {
+          book: {
+            documentId: ctx.params.documentId,
+          },
+        },
+      });
+
+      // 逐个删除stories
+      for (const story of stories) {
+        await strapi.documents("api::story.story").delete({
+          documentId: story.documentId,
+        });
+      }
+
+      // 删除book本身
       ctx.params.id = ctx.params.documentId;
       return await super.delete(ctx);
     },
