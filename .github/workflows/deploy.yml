@@ -66,5 +66,5 @@ jobs:
           cp docker-compose.yml ../
           cd ..
           sudo docker load -i memo-api-img.tar
-          sudo docker image prune
+          sudo docker image prune -f
           sudo docker compose -p memo up -d strapi
