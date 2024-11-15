@@ -24,7 +24,13 @@ export default factories.createCoreController(
     },
 
     async findMany(ctx) {
-      console.log(ctx.request.query.filters);
+      const { filters } = ctx.request.query as {
+        filters: Record<string, any>;
+      };
+      // 解码查询参数中的中文
+      if (filters?.name?.$containsi) {
+        filters.name.$containsi = decodeURIComponent(filters.name.$containsi);
+      }
 
       const spaceFilter = ctx.request.query.space
         ? {
